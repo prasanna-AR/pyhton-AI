@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Prompt History</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- 🔥 Centered input area -->
+<div class="wrapper">
+    <div class="container">
+
+        <h2>💬 Prompt History</h2>
+
+        <form action="/add" method="POST">
+            <input type="text" name="name" placeholder="Enter your prompt..." required>
+            <button type="submit">Send</button>
+        </form>
+
+    </div>
+</div>
+
+<!-- 👇 History stays below -->
+<div class="container">
+    <div class="history">
+        {% for todo in todo_list %}
+            <div class="card">
+                {{ todo.name }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

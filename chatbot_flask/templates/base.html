@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Gemini Chat App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="chat-container">
+
+    <!-- Chat History -->
+    <div class="chat-box">
+        {% for chat in chats %}
+            <div class="message user">
+                {{ chat.user }}
+            </div>
+
+            <div class="message bot">
+                {{ chat.bot }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Input -->
+    <form class="input-box" action="/ask" method="POST">
+        <input type="text" name="prompt" placeholder="Type your message..." required>
+        <button type="submit">Send</button>
+    </form>
+
+</div>
+
+</body>
+</html>

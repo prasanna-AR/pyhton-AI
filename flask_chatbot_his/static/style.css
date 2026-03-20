@@ -1,0 +1,58 @@
+body {
+    font-family: Arial;
+    background: #2888e8;
+    margin: 0px;
+    padding:0px;
+}
+
+/* Wrapper to center ONLY input area */
+.wrapper {
+    display: flex;
+    top: 10%;
+    bottom:20px;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;   /* only top section centered */
+}
+
+/* Container */
+.container {
+    width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+/* Form */
+form {
+   
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Input */
+input {
+    width: 100%;
+    padding: 10px;
+}
+
+/* Button */
+button {
+    padding: 10px;
+    background: blue;
+    color: white;
+    border: none;
+}
+
+/* History */
+.history {
+    margin-top: 1px;
+}
+
+/* Cards */
+.card {
+    background: #dde5ef;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 6px;
+}
