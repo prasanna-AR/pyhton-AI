@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Category - Study Buddy AI</title>
+    <!-- Modern Tech Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #030303;
+            --surface: rgba(255, 255, 255, 0.02);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --brand-gradient: linear-gradient(135deg, #4285F4, #9b72cb, #d96570);
+            --brand-gradient-hover: linear-gradient(135deg, #5b99fc, #b18eed, #eb7a85);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 🌌 Animated Glowing AI Orbs Background */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+        .orb-1 { width: 500px; height: 500px; background: rgba(66, 133, 244, 0.12); top: -10%; left: -10%; }
+        .orb-2 { width: 600px; height: 600px; background: rgba(217, 101, 112, 0.08); bottom: -20%; right: -10%; animation-delay: -5s; }
+        .orb-3 { width: 400px; height: 400px; background: rgba(155, 114, 203, 0.12); top: 30%; left: 50%; animation-duration: 25s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 40px) scale(1.1); }
+            100% { transform: translate(-40px, 80px) scale(0.9); }
+        }
+
+        /* 🧊 Glassmorphism Container */
+        .auth-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 800px;
+            padding: 50px;
+            margin: 20px;
+            background: var(--surface);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 30px 100px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+            animation: containerEnter 1s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: center;
+        }
+
+        @keyframes containerEnter {
+            from { opacity: 0; transform: scale(0.95) translateY(20px); filter: blur(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        }
+
+        .header-content h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        .header-content h1 span {
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        /* Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px 20px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--brand-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .category-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            z-index: 1;
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .category-card:hover .category-icon {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        .category-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            z-index: 1;
+        }
+
+        .category-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            z-index: 1;
+        }
+
+        /* Hidden form */
+        #category-form {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Background Animated Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="auth-container">
+        <div class="header-content">
+            <h1>Personalize your <span>Experience</span></h1>
+            <p>Tell us your education level so we can tailor the Study Buddy just for you.</p>
+        </div>
+
+        <div class="categories-grid">
+            <div class="category-card" onclick="submitCategory('Class 1-5')">
+                <div class="category-icon"><i class="fa-solid fa-child"></i></div>
+                <div class="category-title">Class 1-5</div>
+                <div class="category-desc">Fun, simple & easy to understand explanations.</div>
+            </div>
+            
+            <div class="category-card" onclick="submitCategory('Class 6-12')">
+                <div class="category-icon"><i class="fa-solid fa-school"></i></div>
+                <div class="category-title">Class 6-12</div>
+                <div class="category-desc">Engaging, step-by-step concepts for teens.</div>
+            </div>
+            
+            <div class="category-card" onclick="submitCategory('College')">
+                <div class="category-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div class="category-title">College</div>
+                <div class="category-desc">Detailed, academic & comprehensive content.</div>
+            </div>
+            
+            <div class="category-card" onclick="submitCategory('Others')">
+                <div class="category-icon"><i class="fa-solid fa-user-astronaut"></i></div>
+                <div class="category-title">Others</div>
+                <div class="category-desc">Clear & straightforward general knowledge.</div>
+            </div>
+        </div>
+
+        <form id="category-form" method="POST" action="{{ url_for('select_category') }}">
+            <input type="hidden" name="category" id="category-input" value="">
+        </form>
+    </div>
+
+    <script>
+        function submitCategory(category) {
+            document.getElementById('category-input').value = category;
+            document.getElementById('category-form').submit();
+        }
+    </script>
+</body>
+</html>
